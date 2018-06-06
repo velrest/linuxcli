@@ -1,0 +1,20 @@
+version: '3'
+services:
+  db:
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_USER=linuxcli
+      - MYSQL_PASSWORD=linuxcli
+      - MYSQL_DATABASE=linuxcli
+        
+  dbadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8080:8080"
+    environment:
+      - PMA_HOST=db
+      - PMA_USER=linuxcli
+      - PMA_PASSWORD=linuxcli 
