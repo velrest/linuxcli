@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+from axes.decorators import axes_dispatch
 
 
 def register(request):
@@ -27,12 +30,18 @@ def logout_view(request):
     logout(request)
     return redirect('/')
 
+axes_dispatch
+@method_decorator(csrf_exempt, name='dispatch')
 def index(request):
     return render(request, 'website/index.html')
+
+def lockout(request):
+    return render(request, 'website/lockout.html')
 
 @login_required
 def home(request):
     return render(request, 'website/home.html')
+
 
 @login_required
 def commands(request):
