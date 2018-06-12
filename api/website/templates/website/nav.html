@@ -5,10 +5,70 @@
     </div>
     <div class="uk-navbar-right">
         <div class="uk-navbar-item">
-            <a class="uk-button uk-button-default" href="">
+            {% if user.is_authenticated %}
+            <a class="uk-button uk-button-default" href="/logout/">
                 logout
                 <span uk-icon="icon: sign-out; ratio: 0.75"></span>
             </a>
+            {% else %}
+            <button uk-toggle="target: #login-modal" type="button" class="uk-margin-right uk-button uk-button-primary">Login</button>
+            <button uk-toggle="target: #register-modal" type="button" class="uk-button uk-button-default">Sign up</button>
+            {% endif %}
         </div>
     </div>
 </nav>
+<div id="login-modal" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <p class="uk-modal-title uk-text-uppercase uk-text-center uk-font-normal uk-text-large">Login</p>
+        <div uk-grid>
+            <div class="uk-width-1-1@m uk-width-1-1@s uk-padding uk-align-center">
+                <form class="uk-margin-small-bottom" action="login/" method="POST">
+                    {% csrf_token %}
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon" uk-icon="icon: user"></span>
+                            <input class="uk-input uk-width-large" type="text" name="username" placeholder="Username">
+                        </div>
+                    </div>
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon" uk-icon="icon: lock"></span>
+                            <input class="uk-input uk-width-large" type="text" name="password" placeholder="Password">
+                        </div>
+                    </div>
+                    <button class="uk-button uk-button-primary uk-width-large" type="submit">Login</button>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div id="register-modal" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <p class="uk-modal-title uk-text-uppercase uk-text-center uk-font-normal uk-text-large">Sign Up</p>
+        <div uk-grid>
+            <div class="uk-width-1-1@m uk-padding">
+                <form class="uk-margin-small-bottom" action="register/" method="POST">
+                    {% csrf_token %}
+                    <div class="uk-margin uk-align-center">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon" uk-icon="icon: user"></span>
+                            <input class="uk-input uk-width-large" type="text" name="username" placeholder="Username">
+                        </div>
+                    </div>
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon" uk-icon="icon: lock"></span>
+                            <input class="uk-input uk-width-large" type="password" name="password" placeholder="Password">
+                        </div>
+                    </div>
+                    <button class="uk-button uk-button-primary uk-width-large" type="submit">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
