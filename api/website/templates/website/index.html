@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<<<<<<< api/website/templates/website/index.html
 {% load static %}
 <html lang="en">
 
@@ -24,71 +23,4 @@
         {% endblock %}
       </div>
     </body>
-  <body>
-    {% if user.is_authenticated %}
-      <h2> You are logged in, {{user}} {{user.username}} </h2>
-      <a href="/logout/">Logout</a>
-    {% else %}
-      <button uk-toggle="target: #login-modal" type="button" class="uk-button uk-margin-right uk-button-text">Login</button>
-      <button uk-toggle="target: #register-modal" type="button" class="uk-button uk-margin-right uk-button-text">Sign up</button>
-    {% endif %}
-    <h1> Hello World!</h1>
-    <div id="login-modal" uk-modal>
-      <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-        <button class="uk-modal-close-default" type="button" uk-close></button>
-        <p class="uk-modal-title uk-text-uppercase uk-text-center uk-font-normal uk-text-large">Login</p> 
-        <div uk-grid>
-          <div class="uk-width-1-1@m uk-width-1-1@s uk-padding uk-align-center">
-            <form class="uk-margin-small-bottom" action="login/" method="POST">
-              {% csrf_token %}
-              <div class="uk-margin">
-                <div class="uk-inline">
-                  <span class="uk-form-icon" uk-icon="icon: user"></span>
-                  <input class="uk-input uk-width-large" type="text" name="username" placeholder="Username">
-                </div>
-              </div>
-              <div class="uk-margin">
-                <div class="uk-inline">
-                  <span class="uk-form-icon" uk-icon="icon: lock"></span>
-                  <input class="uk-input uk-width-large" type="text" name="password" placeholder="Password">
-                </div>
-              </div>
-              <button class="uk-button uk-button-primary uk-width-large" type="submit">Login</button>
-            </form>
-            <a class="uk-link-muted uk-text-small" href="">Forgot Password?</a>
-          </div>
-
-          
-        </div>
-      </div>
-    </div>
-
-    <div id="register-modal" uk-modal>
-      <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-        <button class="uk-modal-close-default" type="button" uk-close></button>
-        <p class="uk-modal-title uk-text-uppercase uk-text-center uk-font-normal uk-text-large">Sign Up</p> 
-        <div uk-grid>
-          <div class="uk-width-1-1@m uk-padding">
-            <form class="uk-margin-small-bottom" action="register/" method="POST">
-              {% csrf_token %}
-              <div class="uk-margin uk-align-center">
-                <div class="uk-inline">
-                  <span class="uk-form-icon" uk-icon="icon: user"></span>
-                  <input class="uk-input uk-width-large" type="text" name="username" placeholder="Username">
-                </div>
-              </div>
-              <div class="uk-margin">
-                <div class="uk-inline">
-                  <span class="uk-form-icon" uk-icon="icon: lock"></span>
-                  <input class="uk-input uk-width-large" type="password" name="password" placeholder="Password">
-                </div>
-              </div>
-              <button class="uk-button uk-button-primary uk-width-large" type="submit">Create Account</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-    </form>
-  </body>
 </html>
