@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-{% load static %}
+<!DOCTYPE html> {% load static %}
 <html lang="en">
 
 <head>
@@ -8,19 +7,32 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>linuxcli</title>
   <!-- UIkit CSS -->
+  <link rel="stylesheet" href="{% static "css/main.css" %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.5/css/uikit.min.css" />
 
   <!-- UIkit JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.5/js/uikit.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.5/js/uikit-icons.min.js"></script>
 </head>
-    <body>
-      <div>
-        {% include "website/nav.html" %}
+
+<body>
+  <div>
+    {% include "website/nav.html" %}
+  </div>
+  <div>
+    {% block main %}
+    <div class="uk-container">
+      <div class="uk-flex uk-flex-center uk-flex-middle uk-flex-column" uk-height-viewport>
+        <h1 class="uk-heading-line uk-text-center uk-width-1-1">
+          <span>Welcome to linuxcli</span>
+        </h1>
+        <span>Made with <span uk-icon="icon: heart"></span> by John and Jonas on GitLab</span>
+        <span>Find other cool commands <a href="https://www.tecmint.com/useful-linux-commands-for-newbies/">here</a>!</span>
       </div>
-      <div>
-        {% block main %}
-        {% endblock %}
-      </div>
-    </body>
+      <img src="www.thecatapi.com/api/images/get" alt="">
+    </div>
+    {% endblock %}
+  </div>
+</body>
+
 </html>

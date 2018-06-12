@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from axes.decorators import axes_dispatch
+from subprocess import run, PIPE
+from django.conf import settings
 
 
 def register(request):
@@ -33,50 +35,25 @@ def logout_view(request):
 axes_dispatch
 @method_decorator(csrf_exempt, name='dispatch')
 def index(request):
+    if request.user.is_authenticated:
+        return redirect('/home')
     return render(request, 'website/index.html')
 
 def lockout(request):
     return render(request, 'website/lockout.html')
 
 @login_required
-def home(request):
-    return render(request, 'website/home.html')
-
-
-@login_required
-def commands(request):
-    commands = {
-        'ls': 
-        {
-            'desc': 'List files in directory',
-            'parameters': {
-                'l': {
-                    'desc': 'Print the files as List',
-                },
-                'a': {
-                    'desc': 'Show all files (includes hidden files)',
-                }
-            }
-        },
-        'pwd': 
-        {
-            'desc': 'Print current working path',
-        },
-        'pwd': 
-        {
-            'desc': 'Print current working path',
-        },
-        'date': 
-        {
-            'desc': 'Print the current date considering the configured locales',
-            'parameters': {
-                'l': {
-                    'desc': 'Print the files as List',
-                },
-                'a': {
-                    'desc': 'Show all files (includes hidden files)',
-                }
-            }
-        }
-    }
-    return render(request, 'website/commands.html')
+def commands(request, command=None):
+    commands = settings.COMMANDS
+    if request.method == 'GET':
+        return render(request, 'website/commands.html', {'commands':commands})
+    elif request.method == 'POST':        
+        if commands.get(command):
+            parameters = commands.get(command).get('parameters')
+            if not parameters:
+                parameters = {}
+            exec_list = [command]
+            exec_list.extend(['-{}'.format(k) for k,v in request.POST.items() if parameters.get(k)])
+            return render(request, 'website/output.html', { 'output': run(exec_list, stdout=PIPE).stdout.decode('utf-8'), 'command': ' '.join(exec_list) })
+        else:
+            return redirect('/home')
