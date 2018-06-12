@@ -1,8 +1,39 @@
-{% extends "website/index.html" %}
-{% block main %}
-<div class="uk-container">
-        <h1 class="uk-heading-divider">Commands</h1>
-        {% for command in commands %}
+{% extends "website/index.html" %} {% block main %}
+<div class="uk-padding-large">
+    <h1 class="uk-heading-divider">Commands</h1>
+    <div class="uk-flex uk-flex-wrap" uk-height-match="target: > div > div > form > .uk-card-body">
+        {% for k, v in commands.items %}
+        <div class="uk-padding">
+            <div class="uk-card uk-card-default uk-width-large">
+                <div class="uk-card-header">
+                    <h3 class="uk-card-title">$ {{ k }}</h3>
+                </div>
+                <form action="/command/{{ k }}/" method="post" class="uk-form-horizontal">
+                    {% csrf_token %}
+                    <div class="uk-card-body">
+                        <p>{{ v.desc }}</p>
+                        <p class="uk-text-bold">Options:</p>
+                        {% if not v.parameters %}
+                        <p>There are no options for this command.</p>
+                        {% endif %} {% for k, v in v.parameters.items %}
+                        <div class="uk-flex uk-flex-middle uk-flex-between uk-margin-small-bottom">
+                            <div class="uk-padding-small">
+                                <span class="uk-text-bold">{{ k }}</span> - {{ v.desc }}
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" name="{{ k }}">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <hr> {% endfor %}
+                    </div>
+                    <div class="uk-card-footer">
+                        <button class="uk-button uk-button-primary uk-align-right">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
         {% endfor %}
+    </div>
 </div>
 {% endblock %}

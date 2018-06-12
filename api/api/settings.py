@@ -137,3 +137,67 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+COMMANDS = {
+    'ls': 
+        {
+        'desc': 'List files in directory',
+        'parameters': {
+            'l': {
+                'desc': 'Print the files as List',
+            },
+            'a': {
+                'desc': 'Show all files (includes hidden files)',
+            }
+        }
+    },
+    'pwd': 
+    {
+        'desc': 'Print current working path',
+    },
+    'date': 
+    {
+        'desc': 'Print the current date considering the configured locales',
+        'parameters': {
+            'u': {
+                'desc': 'Print UTC time',
+            }
+        }
+    },
+    'lsblk': 
+    {
+        'desc': 'List all block devices',
+        'parameters': {
+            'l': {
+                'desc': 'Use list output format',
+            },
+            'm': {
+                'desc': 'Print info about permissions',
+            }
+        }
+    },
+    'uname': 
+    {
+        'desc': 'Print detailed information about the machine name, Operating System and Kernel',
+        'parameters': {
+            'a': {
+                'desc': 'Print all information',
+            },
+            'p': {
+                'desc': 'Print the processor type',
+            }
+        }
+    },
+    'cal': 
+    {
+        'desc': 'Print a minimalistic calendar',
+        'parameters': {
+            'm': {
+                'desc': 'Start week at Monday',
+            },
+            'y': {
+                'desc': 'Print the whole year',
+            }
+        }
+    }       
+}
