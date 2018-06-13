@@ -52,6 +52,7 @@ def commands(request, command=None):
                 parameters = {}
             exec_list = [command]
             exec_list.extend(['-{}'.format(k) for k,v in request.POST.items() if parameters.get(k)])
+            print(exec_list)
             return render(request, 'website/output.html', { 'output': run(exec_list, stdout=PIPE).stdout.decode('utf-8'), 'command': ' '.join(exec_list) })
         else:
             return redirect('/home')
