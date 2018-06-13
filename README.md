@@ -14,6 +14,7 @@ Mit der eingebaute django methode login(), wird ein session automatisch erstellt
 ### Systemkommandos
 
 ### Logging
+Commands werden ausgedruckt mit python print() ins terminal
 
 ### Passwort sicherung
 Wir nutzen die default django authentification um benutzer zu erstellen und persistent speichern in einer mysql datenbank. Django hashed und saltet der passowrt automatisch mit pbkdf2_sha256.
