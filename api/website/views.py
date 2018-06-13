@@ -32,8 +32,6 @@ def logout_view(request):
     logout(request)
     return redirect('/')
 
-axes_dispatch
-@method_decorator(csrf_exempt, name='dispatch')
 def index(request):
     if request.user.is_authenticated:
         return redirect('/home')
