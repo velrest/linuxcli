@@ -23,6 +23,3 @@ Wir nutzen die default django authentification um benutzer zu erstellen und pers
 
 ### Brute-force/DOS
 Wir nutzen das paket django-axes um brute force & DOS angriffen zu verhindern. axes erlaubt 3 login attempts. Nacher werden die ip auf ein blacklist gesetzt und die login funktionalität wird für die IP gesperrt.
-
-### Register
-Man kann ein benutzer erstellen 
